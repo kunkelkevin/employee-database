@@ -430,7 +430,7 @@ const addDepartment = () => {
 const updateInformation = (type) => {
   console.log(type);
   const queryUrl = "http://localhost:3001/api/employee";
-  let putUrl = `http://localhost:3001/api/employee/${type}`;
+  let putUrl = `http://localhost:3001/api/employee/${type}/`;
   let choicesUrl = "http://localhost:3001/api/";
   console.log(putUrl);
   fetch(queryUrl)
@@ -476,15 +476,22 @@ const updateInformation = (type) => {
                 ])
                 .then(({ id }) => {
                   const body = { id };
-
+                  console.log(putUrl);
                   fetch(putUrl, {
                     method: "put",
                     body: JSON.stringify(body),
                     headers: { "Content-Type": "application/json" },
-                  }).then(() => {
-                    console.log(`You updated a ${type}`);
-                    initialQuestions();
-                  });
+                  })
+                    .then((response) => {
+                      if (!response.ok) {
+                        return console.log("Error: " + response.statusText);
+                      }
+                      return response.json();
+                    })
+                    .then(() => {
+                      console.log(`You updated a ${type}`);
+                      initialQuestions();
+                    });
                 });
             });
         });

@@ -185,7 +185,7 @@ router.post("/employee", ({ body }, res) => {
 router.put("/employee/role/:id", (req, res) => {
   const sql = `UPDATE employee SET role_id = ? 
                  WHERE id = ?`;
-  const params = [req.body.role_id, req.params.id];
+  const params = [req.body.id, req.params.id];
 
   db.query(sql, params, (err, result) => {
     if (err) {
@@ -208,7 +208,7 @@ router.put("/employee/role/:id", (req, res) => {
 router.put("/employee/manager/:id", (req, res) => {
   const sql = `UPDATE employee SET manager_id = ? 
                    WHERE id = ?`;
-  const params = [req.body.manager_id, req.params.id];
+  const params = [req.body.id, req.params.id];
 
   db.query(sql, params, (err, result) => {
     if (err) {
