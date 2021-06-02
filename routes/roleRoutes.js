@@ -15,7 +15,26 @@ router.get("/roles", (req, res) => {
       res.status(500).json({ error: err.message });
       return;
     }
-    res.json(rows);
+    res.json({
+      message: "success",
+      data: rows,
+    });
+  });
+});
+
+// Get roles for choices
+router.get("/role", (req, res) => {
+  const sql = `SELECT DISTINCT role.id AS value, role.title AS name FROM role`;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: rows,
+    });
   });
 });
 

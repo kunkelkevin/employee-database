@@ -18,6 +18,22 @@ router.get("/departments", (req, res) => {
   });
 });
 
+// Get department choices
+router.get("/department", (req, res) => {
+  const sql = `SELECT id AS value, name FROM department`;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: rows,
+    });
+  });
+});
+
 // Create a department
 router.post("/department", ({ body }, res) => {
   const sql = `INSERT INTO department (name) VALUES (?)`;

@@ -29,21 +29,30 @@ router.get("/employees", (req, res) => {
   });
 });
 
+// Get all employees for choices
+router.get("/employee", (req, res) => {
+  const sql = `SELECT employee.id AS value, 
+                  CONCAT (employee.first_name, " ", employee.last_name) AS name
+                  FROM employee`;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: rows,
+    });
+  });
+});
+
 // Get all but one employee
 router.get("/employees/:id", (req, res) => {
-  const sql = `SELECT employee.id, employee.first_name, employee.last_name,
-                  role.title AS job_title,
-                  department.name AS department,
-                  role.salary AS salary,
-                  CONCAT(manager.first_name, " ", manager.last_name) AS manager
-                  FROM employee 
-                  LEFT JOIN role 
-                  ON employee.role_id = role.id
-                  LEFT JOIN department
-                  ON role.department_id = department.id
-                  LEFT JOIN employee manager
-                  ON employee.manager_id = manager.id
-                  WHERE employee.id != ${req.params.id}`;
+  const sql = `SELECT employee.id AS value, 
+                    CONCAT (employee.first_name, " ", employee.last_name) AS name
+                    FROM employee 
+                    WHERE employee.id != ${req.params.id}`;
 
   db.query(sql, (err, rows) => {
     if (err) {
@@ -72,6 +81,26 @@ router.get("/employees/manager/:id", (req, res) => {
                     LEFT JOIN employee manager
                     ON employee.manager_id = manager.id
                     WHERE employee.manager_id = ${req.params.id}`;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: rows,
+    });
+  });
+});
+
+// Get employees who are managers
+router.get("/manager", (req, res) => {
+  const sql = `SELECT DISTINCT manager.id AS value,
+                      CONCAT(manager.first_name, " ", manager.last_name) AS name
+                      FROM employee 
+                      INNER JOIN employee manager
+                      ON employee.manager_id = manager.id`;
 
   db.query(sql, (err, rows) => {
     if (err) {
