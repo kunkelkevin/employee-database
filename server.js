@@ -210,13 +210,13 @@ const deleteQuestions = () => {
     .then(({ type }) => {
       switch (type) {
         case "Remove a Department":
-          deleteInformation(department);
+          deleteInformation("department");
           break;
         case "Remove a Role":
-          deleteInformation(role);
+          deleteInformation("role");
           break;
         case "Remove an Employee":
-          deleteInformation(employee);
+          deleteInformation("employee");
           break;
         default:
           initialQuestions();
@@ -428,11 +428,9 @@ const addDepartment = () => {
 };
 
 const updateInformation = (type) => {
-  console.log(type);
   const queryUrl = "http://localhost:3001/api/employee";
   let putUrl = `http://localhost:3001/api/employee/${type}/`;
   let choicesUrl = "http://localhost:3001/api/";
-  console.log(putUrl);
   fetch(queryUrl)
     .then((response) => {
       if (!response.ok) {
@@ -476,7 +474,6 @@ const updateInformation = (type) => {
                 ])
                 .then(({ id }) => {
                   const body = { id };
-                  console.log(putUrl);
                   fetch(putUrl, {
                     method: "put",
                     body: JSON.stringify(body),
@@ -498,4 +495,40 @@ const updateInformation = (type) => {
     });
 };
 
-const deleteInformation = (type) => {};
+const deleteInformation = (type) => {
+  const queryUrl = "http://localhost:3001/api/" + type;
+  let deleteUrl = queryUrl + "/";
+  fetch(queryUrl)
+    .then((response) => {
+      if (!response.ok) {
+        return alert("Error: " + response.statusText);
+      }
+      return response.json();
+    })
+    .then(({ data }) => {
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "id",
+            message: `Which ${type} do you want to remove`,
+            choices: data,
+          },
+        ])
+        .then(({ id }) => {
+          deleteUrl += id;
+          console.log(deleteUrl);
+          fetch(deleteUrl, { method: "delete" })
+            .then((response) => {
+              if (!response.ok) {
+                return console.log("Error: " + response.statusText);
+              }
+              return response.json();
+            })
+            .then(() => {
+              console.log(`You deleted a ${type}`);
+              initialQuestions();
+            });
+        });
+    });
+};
