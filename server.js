@@ -4,7 +4,6 @@ const apiRoutes = require("./routes");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
 const fetch = require("node-fetch");
-const path = require("path");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -463,6 +462,9 @@ const updateInformation = (type) => {
               return response.json();
             })
             .then(({ data }) => {
+              if (type === "manager") {
+                data.push({ value: 0, name: "None" });
+              }
               inquirer
                 .prompt([
                   {

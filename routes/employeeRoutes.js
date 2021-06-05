@@ -208,6 +208,10 @@ router.put("/employee/role/:id", (req, res) => {
 router.put("/employee/manager/:id", (req, res) => {
   const sql = `UPDATE employee SET manager_id = ? 
                    WHERE id = ?`;
+  if (req.body.id === 0) {
+    req.body.id = null;
+  }
+  console.log(req.params.id);
   const params = [req.body.id, req.params.id];
 
   db.query(sql, params, (err, result) => {
