@@ -78,16 +78,20 @@ The employee database is a command prompt driven application that can be used to
 
 ## Installation
 
-In order to run the program, you can download or clone the program from my GitHub site. In the root directory of the program, ensure all packages are available by typing 'npm init' and 'npm install' in the command line. Then the program should be available to execute with "node index.js".
+In order to run the program, you can download or clone the program from my GitHub site. In the root directory of the program, ensure all packages are available by typing 'npm init' and 'npm install' in the command line. You will also have to MySQL which can be downloaded at [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/) and create a file named .env with the following two lines:<br />
+DB_USER='your-mysql-username'<br />
+DB_PW='your-mysql-password'<br />
+Then the program should be available to execute with "node server.js" or "npm start".  
 
 ## Usage
 
-The team profile generator can be used to create a dynamic layout of employee information based on command line prompts. A video of how the program operates can be seen [here](https://drive.google.com/file/d/1IMwOQQogHbe365GF4Zbu3N0u9CbiVGzn/view).
+The employee database can be used to create a departments, roles and employee profiles for a business layout based on command line prompts. A video of how the program operates can be seen [here](https://drive.google.com/file/d/1pgGr1_5AQ7ZiWHgzSK3CGL2xa327lhWm/view
+).
 
-Screenshot showing sample output of team profile:
-![Team Profile Screenshot](/img/Screenshot.png "Team Profile Screenshot")
+Screenshot showing sample output of database questions:
+![Employee Database Screenshot](/img/Screenshot_sample_questions.png "Employee Database Screenshot")
 
 
 ## Questions
 
-The readme generator can be found on the following [GitHub page](https://github.com/kunkelkevin/team-profile).<br />If you have any additional questions, you can email me [here](mailto:kunkelkevin@yahoo.com)
+The Employee Database can be found on the following [GitHub page](https://github.com/kunkelkevin/employee-database).<br />If you have any additional questions, you can email me [here](mailto:kunkelkevin@yahoo.com)
