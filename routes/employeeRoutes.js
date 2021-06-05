@@ -211,7 +211,6 @@ router.put("/employee/manager/:id", (req, res) => {
   if (req.body.id === 0) {
     req.body.id = null;
   }
-  console.log(req.params.id);
   const params = [req.body.id, req.params.id];
 
   db.query(sql, params, (err, result) => {

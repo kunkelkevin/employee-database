@@ -519,7 +519,6 @@ const deleteInformation = (type) => {
         ])
         .then(({ id }) => {
           deleteUrl += id;
-          console.log(deleteUrl);
           fetch(deleteUrl, { method: "delete" })
             .then((response) => {
               if (!response.ok) {
