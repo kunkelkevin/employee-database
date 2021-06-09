@@ -85,8 +85,7 @@ Then the program should be available to execute with "node server.js" or "npm st
 
 ## Usage
 
-The employee database can be used to create a departments, roles and employee profiles for a business layout based on command line prompts. A video of how the program operates can be seen [here](https://drive.google.com/file/d/1pgGr1_5AQ7ZiWHgzSK3CGL2xa327lhWm/view
-).
+The employee database can be used to create a departments, roles and employee profiles for a business layout based on command line prompts. A video of how the program operates can be seen [here](https://drive.google.com/file/d/1iye09sYslyPKXD1iJH2s7m0f3_WoPILD/view).
 
 Screenshot showing sample output of database questions:
 ![Employee Database Screenshot](/img/Screenshot_sample_questions.png "Employee Database Screenshot")
